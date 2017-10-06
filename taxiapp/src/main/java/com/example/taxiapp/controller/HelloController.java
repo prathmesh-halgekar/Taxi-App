@@ -10,6 +10,6 @@ public class HelloController {
 	@RequestMapping(value="/welcome", method = RequestMethod.GET, produces="application/json")
     public String loginSuccess() {
 		
-	    return "Success";        
+	    return "Success123";        
     }
 }

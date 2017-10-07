@@ -19,6 +19,6 @@ public class HelloController {
 	@RequestMapping(value="/register", method = RequestMethod.POST, produces="application/json")
     public String createUser(@RequestBody Customer customer) {
 		
-	    return "Customer : "+customer.getFirstName()+" registered successfully.";        
+	    return "{ \"Customer\" : \""+customer.getFirstName()+" registered successfully.\"}";        
     }
 }

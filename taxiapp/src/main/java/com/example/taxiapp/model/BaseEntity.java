@@ -1,47 +1,36 @@
 package com.example.taxiapp.model;
 
-import java.io.Serializable;
 import java.sql.Date;
 
 import javax.persistence.Column;
-import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-public class BaseEntity implements Serializable {
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+public class BaseEntity {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-	
-	@Id
-	private int id;
-	
+
 	@Column(name = "created_by")
 	private String createdBy;
-	
+
 	@Column(name = "modified_by")
 	private String modifiedBy;
-	
+
 	@Column(name = "active")
 	private String isActive;
-	
-	@Column(name = "created_at", columnDefinition="DATETIME")
+
+	@Column(name = "created_at", columnDefinition = "DATETIME")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date createdAt;
-	
-	@Column(name = "modified_at", columnDefinition="DATETIME")
+
+	@Column(name = "modified_at", columnDefinition = "DATETIME")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date modifiedAt;
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
 
 	public String getCreatedBy() {
 		return createdBy;
@@ -85,8 +74,8 @@ public class BaseEntity implements Serializable {
 
 	@Override
 	public String toString() {
-		return "BaseEntity [id=" + id + ", createdBy=" + createdBy + ", modifiedBy=" + modifiedBy + ", isActive="
-				+ isActive + ", createdAt=" + createdAt + ", modifiedAt=" + modifiedAt + "]";
+		return "BaseEntity [createdBy=" + createdBy + ", modifiedBy=" + modifiedBy + ", isActive=" + isActive
+				+ ", createdAt=" + createdAt + ", modifiedAt=" + modifiedAt + "]";
 	}
 
 	@Override
@@ -95,7 +84,6 @@ public class BaseEntity implements Serializable {
 		int result = 1;
 		result = prime * result + ((createdAt == null) ? 0 : createdAt.hashCode());
 		result = prime * result + ((createdBy == null) ? 0 : createdBy.hashCode());
-		result = prime * result + id;
 		result = prime * result + ((isActive == null) ? 0 : isActive.hashCode());
 		result = prime * result + ((modifiedAt == null) ? 0 : modifiedAt.hashCode());
 		result = prime * result + ((modifiedBy == null) ? 0 : modifiedBy.hashCode());
@@ -121,8 +109,6 @@ public class BaseEntity implements Serializable {
 				return false;
 		} else if (!createdBy.equals(other.createdBy))
 			return false;
-		if (id != other.id)
-			return false;
 		if (isActive == null) {
 			if (other.isActive != null)
 				return false;
@@ -140,7 +126,5 @@ public class BaseEntity implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
 
 }

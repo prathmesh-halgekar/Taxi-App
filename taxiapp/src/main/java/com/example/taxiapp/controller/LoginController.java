@@ -3,16 +3,20 @@ package com.example.taxiapp.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.taxiapp.model.Customer;
+import com.example.taxiapp.repository.CustomerRepository;
 import com.example.taxiapp.service.SuburbService;
 
 @RestController
 public class LoginController {
+	@Autowired
+	CustomerRepository customerRepository;
 	
 	private SuburbService suburbService = new SuburbService();
 
@@ -43,5 +47,12 @@ public class LoginController {
 		
 		return response;
 	    
+    }
+	
+	@RequestMapping(value="/getCustomers", method = RequestMethod.GET, produces="application/json")
+    public Map<String, Object> getCustomerDetails() {
+		Map<String, Object> response = new HashMap<String,Object>();
+		response.put("customers", customerRepository.findAll());
+	    return response;        
     }
 }
